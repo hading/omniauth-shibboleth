@@ -2,7 +2,7 @@ module OmniAuth
   module Strategies
     class Shibboleth
       include OmniAuth::Strategy
-
+      
       option :shib_session_id_field, 'Shib-Session-ID'
       option :shib_application_id_field, 'Shib-Application-ID'
       option :uid_field, 'eppn'
@@ -15,6 +15,18 @@ module OmniAuth
         "/Shibboleth.sso/Login?target=https://#{host}/auth/shibboleth/callback"
       end
 
+      def self.login_path_with_entity(host, entity)
+        "/Shibboleth.sso/Login?target=#{self.return_target(host)}&entityID=#{self.shibboteth_entity_id(entity)}"
+      end
+
+      def self.return_target(host)
+        CGI.escape("https://#{host}/auth/shibboleth/callback")
+      end
+
+      def self.shibboleth_entity_id(entity)
+        CGI.escape(entity)
+      end
+      
       def request_phase
         [
             302,
