@@ -12,11 +12,11 @@ module OmniAuth
       option :debug, false
 
       def self.login_path(host)
-        "/Shibboleth.sso/Login?target=https://#{host}/auth/shibboleth/callback"
+        "https://#{host}/Shibboleth.sso/Login?target=https://#{host}/auth/shibboleth/callback"
       end
 
       def self.login_path_with_entity(host, entity)
-        "/Shibboleth.sso/Login?target=#{self.return_target(host)}&entityID=#{self.shibboleth_entity_id(entity)}"
+        "https://#{host}/Shibboleth.sso/Login?target=#{self.return_target(host)}&entityID=#{self.shibboleth_entity_id(entity)}"
       end
 
       def self.return_target(host)
