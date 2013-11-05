@@ -16,7 +16,7 @@ module OmniAuth
       end
 
       def self.login_path_with_entity(host, entity)
-        "/Shibboleth.sso/Login?target=#{self.return_target(host)}&entityID=#{self.shibboteth_entity_id(entity)}"
+        "/Shibboleth.sso/Login?target=#{self.return_target(host)}&entityID=#{self.shibboleth_entity_id(entity)}"
       end
 
       def self.return_target(host)
